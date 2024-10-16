@@ -21,15 +21,37 @@ app.get('/api', (req, res) => {
     });
 });
 
+const users = [];
+
 socketIo.on('connection', (socket) => {
-    console.log(`${socket.id} user connected`)
+    console.log(`${socket.id} user connected`);
+
     socket.on('message', (data) => {
-        socketIo.emit('response', data)
-    })
+        socketIo.emit('response', data);
+    });
+    
+    socket.on('typing', (data) => socket.broadcast.emit('responseTyping', data))
+
+    socket.on('logOutUser', (data) => {
+        // Обновляем массив пользователей
+        const updatedUsers = users.filter(user => user.socketID !== data.socketID);
+        // Сохраняем обновленный список пользователей
+        users.length = 0;
+        users.push(...updatedUsers);
+        // Отправляем обновленный список пользователей на клиент
+        socketIo.emit('userLoggedOut', users);
+    });
+
+    socket.on('newUser', (data) => {
+        users.push(data);
+        socketIo.emit('responseNewUser', users);
+    });
+
     socket.on('disconnect', () => {
-        console.log(`${socket.id} user disconnect`)
-    })
-})
+        console.log(`${socket.id} user disconnect`);
+    });
+});
+
 
 
 // Запуск сервера

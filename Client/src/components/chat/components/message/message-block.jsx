@@ -3,6 +3,9 @@ import styles from './message-block.module.css'
 
 export default function MessageBlock({ socket }) {
     const [message, setMessage] = useState('')
+    const isTyping = () => {
+        socket.emit('typing', `${localStorage.getItem('user')} is typing`)
+    }
 
     const handleSend = (e) => {
         e.preventDefault()
@@ -21,7 +24,9 @@ export default function MessageBlock({ socket }) {
             <form action="" onSubmit={handleSend}>
                 <input type="text" className={styles.messageInput}
                     value={message}
-                    onChange={(e) => { setMessage(e.target.value) }} />
+                    onChange={(e) => { setMessage(e.target.value) }}
+                    onKeyDown={isTyping}
+                />
                 <button>Submit</button>
             </form>
         </div>
