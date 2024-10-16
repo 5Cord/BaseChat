@@ -4,17 +4,17 @@ import styles from './sidebar.module.css'
 export default function Sidebar({ socket }) {
     const [users, setUsers] = useState([])
 
-useEffect(() => {
-    socket.on('responseNewUser', (data) => setUsers(data));
+    useEffect(() => {
+        socket.on('responseNewUser', (data) => setUsers(data));
 
-    // Обработка выхода пользователя
-    socket.on('userLoggedOut', (data) => setUsers(data));
+        // Обработка выхода пользователя
+        socket.on('userLoggedOut', (data) => setUsers(data));
 
-    return () => {
-        socket.off('responseNewUser');
-        socket.off('userLoggedOut');
-    };
-}, [socket]);
+        return () => {
+            socket.off('responseNewUser');
+            socket.off('userLoggedOut');
+        };
+    }, [socket]);
 
     return (
         <div className={styles.container}>
