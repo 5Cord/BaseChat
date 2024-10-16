@@ -19,7 +19,7 @@ export default function Body({ messages }) {
         {
           messages.map(el => el.name === localStorage.getItem('user') ? (
             <div className={styles.chats} key={el.id}>
-              <p>you</p>
+              <p className={styles.right}>you</p>
               <div className={styles.messageSender}>
                 <p>{el.text}</p>
               </div>
@@ -27,7 +27,7 @@ export default function Body({ messages }) {
 
           ) : (
             <div className={styles.chats} key={el.id}>
-              <p>{el.name}</p>
+              <p className={styles.left}>{el.name}</p>
               <div className={styles.messageRecioient}>
                 <p>{el.text}</p>
               </div>
