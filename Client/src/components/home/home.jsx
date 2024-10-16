@@ -16,7 +16,7 @@ export default function Home({ socket }) {
             <h2>Connection in chat</h2>
             <label htmlFor='username'></label>
             <input type="text" id='username' value={user} onChange={(e) => setUser(e.target.value)} />
-            <button type="submit">Отправить</button>
+            <button type="submit">Submit</button>
         </form>
     )
 }
