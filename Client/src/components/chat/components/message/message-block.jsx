@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './message-block.module.css'
 
-export default function MessageBlock({ socket }) {
+export default function MessageBlock({ socket, status}) {
     const [message, setMessage] = useState('')
     const isTyping = () => {
         socket.emit('typing', `${localStorage.getItem('user')} is typing`)
@@ -22,6 +22,7 @@ export default function MessageBlock({ socket }) {
     return (
         <div className={styles.messagBlock}>
             <form action="" onSubmit={handleSend}>
+        <div className={styles.status}><p>{status} ...</p></div>
                 <input type="text" className={styles.messageInput}
                     value={message}
                     onChange={(e) => { setMessage(e.target.value) }}

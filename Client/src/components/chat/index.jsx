@@ -24,8 +24,8 @@ export default function ChatPage({ socket }) {
         <div className={styles.container}>
             <Sidebar socket={socket} />
             <main className={styles.main}>
-                <Body messages={messages} socket={socket} status={status} />
-                <MessageBlock socket={socket} />
+                <Body messages={messages} socket={socket} />
+                <MessageBlock socket={socket} status={status} />
             </main>
         </div>
     )

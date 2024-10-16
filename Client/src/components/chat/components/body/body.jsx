@@ -41,8 +41,6 @@ export default function Body({ messages, socket, status }) {
           )
           )
         }
-
-        <div className={styles.status}><p>{status} ...</p></div>
       </div>
     </>
   )
